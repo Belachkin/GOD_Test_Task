@@ -7,6 +7,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private FixedJoystick _joystick;
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _rotationSpeed = 10f;
+    
+    [SerializeField] private GameObject _player;
+    
     private Rigidbody2D rb;
     private Vector2 movement;
     
@@ -27,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
             // Поворачиваем персонажа к новому углу
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
             // Плавно поворачиваем персонажа
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+            _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
         
     }
