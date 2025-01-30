@@ -7,7 +7,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float walkSpeed = 2.5f;
-    [SerializeField] private float travelDistance = 5f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float changeDirectionInterval = 0.5f;
     [SerializeField] private float detectionRadius = 2f;
@@ -18,7 +17,8 @@ public class Enemy : MonoBehaviour
     {
         stateMashine = new EnemyStateMashine();
 
-        stateMashine.AddState(new RandomWalkEnemyState(stateMashine, rb, walkSpeed, travelDistance, changeDirectionInterval, detectionRadius));
+        stateMashine.AddState(new RandomWalkEnemyState(stateMashine, rb, walkSpeed, changeDirectionInterval, detectionRadius));
+        stateMashine.AddState(new ChasingEnemyState(stateMashine, rb, walkSpeed, detectionRadius));
         
         stateMashine.SetState<RandomWalkEnemyState>();
     }

@@ -7,7 +7,6 @@ namespace Code.Enemy.States
         
         private Rigidbody2D _rb;
         private float _walkSpeed;
-        private float _travelDistance;
         private float _changeDirectionInterval;
         private float _nextChangeTime;
         private float _detectionRadius;
@@ -16,14 +15,13 @@ namespace Code.Enemy.States
         private Vector2 travelDirection = Vector2.zero;
         
         public RandomWalkEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb, 
-                                    float walkSpeed, float travelDistance, 
+                                    float walkSpeed, 
                                     float changeDirectionInterval, float detectionRadius)
         {
             _stateMashine = stateMashine; 
             
             _rb = rb;
             _walkSpeed = walkSpeed;
-            _travelDistance = travelDistance;
             _changeDirectionInterval = changeDirectionInterval;
             _detectionRadius = detectionRadius;
         }
@@ -45,12 +43,6 @@ namespace Code.Enemy.States
             }
             
             TryDetectionPlayer();
-            
-            // if (travelDirection != _rb.position)
-            // {
-            //     travelDirection = new Vector2(Random.Range(_rb.position.x + -_travelDistance, _rb.position.x + _travelDistance), 
-            //                                     Random.Range(_rb.position.y + -_travelDistance, _rb.position.y + _travelDistance));
-            // }
         }
 
         public void FixedUpdater()
@@ -64,7 +56,7 @@ namespace Code.Enemy.States
         public void Exit()
         {
             Debug.Log("Exit RndWalk");
-            _stateMashine.SetState<ChasingEnemyState>();
+            
         }
         
         private void GenerateNewDirection()
@@ -82,7 +74,7 @@ namespace Code.Enemy.States
                 if (collider.CompareTag("Player"))
                 {
                     Debug.Log("PlayerEnterZone");
-                    Exit();
+                    _stateMashine.SetState<ChasingEnemyState>();
                     return;
                 }
             }

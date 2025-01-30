@@ -31,19 +31,6 @@ public class EnemyStateMashine
         }
     }
     
-    // public void StartState(IEnemyState newState)
-    // {
-    //     currentState = states[newState.GetType()];
-    //     currentState.Enter();
-    // }
-    //
-    // public void ChangeState(IEnemyState newState)
-    // {
-    //     currentState.Exit();
-    //     currentState = states[newState.GetType()];
-    //     currentState.Enter();
-    // }
-
     public void Update()
     {
         currentState.Updater();
