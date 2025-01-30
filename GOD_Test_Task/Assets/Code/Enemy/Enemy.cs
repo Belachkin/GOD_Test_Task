@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float travelDistance = 5f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float changeDirectionInterval = 0.5f;
+    [SerializeField] private float detectionRadius = 2f;
     
     private EnemyStateMashine stateMashine;
     
@@ -17,7 +18,7 @@ public class Enemy : MonoBehaviour
     {
         stateMashine = new EnemyStateMashine();
 
-        stateMashine.AddState(new RandomWalkEnemyState(stateMashine, rb, walkSpeed, travelDistance, changeDirectionInterval));
+        stateMashine.AddState(new RandomWalkEnemyState(stateMashine, rb, walkSpeed, travelDistance, changeDirectionInterval, detectionRadius));
         
         stateMashine.SetState<RandomWalkEnemyState>();
     }

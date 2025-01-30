@@ -8,13 +8,16 @@ namespace Code.Enemy.States
         private Rigidbody2D _rb;
         private float _walkSpeed;
         private float _travelDistance;
-        public float _changeDirectionInterval;
+        private float _changeDirectionInterval;
         private float _nextChangeTime;
+        private float _detectionRadius;
         
         private EnemyStateMashine _stateMashine;
         private Vector2 travelDirection = Vector2.zero;
         
-        public RandomWalkEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb, float walkSpeed, float travelDistance, float changeDirectionInterval)
+        public RandomWalkEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb, 
+                                    float walkSpeed, float travelDistance, 
+                                    float changeDirectionInterval, float detectionRadius)
         {
             _stateMashine = stateMashine; 
             
@@ -22,6 +25,7 @@ namespace Code.Enemy.States
             _walkSpeed = walkSpeed;
             _travelDistance = travelDistance;
             _changeDirectionInterval = changeDirectionInterval;
+            _detectionRadius = detectionRadius;
         }
         
         public void Enter()
@@ -40,6 +44,8 @@ namespace Code.Enemy.States
                 _nextChangeTime = Time.time + _changeDirectionInterval;
             }
             
+            TryDetectionPlayer();
+            
             // if (travelDirection != _rb.position)
             // {
             //     travelDirection = new Vector2(Random.Range(_rb.position.x + -_travelDistance, _rb.position.x + _travelDistance), 
@@ -55,16 +61,39 @@ namespace Code.Enemy.States
             }
         }
         
-        void GenerateNewDirection()
+        public void Exit()
+        {
+            Debug.Log("Exit RndWalk");
+            _stateMashine.SetState<ChasingEnemyState>();
+        }
+        
+        private void GenerateNewDirection()
         {
             // Генерация нового случайного направления
             float angle = Random.Range(0, 2 * Mathf.PI);
             travelDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
         }
-        
-        public void Exit()
+
+        private void TryDetectionPlayer()
         {
-            Debug.Log("Exit RndWalk");
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(_rb.position, _detectionRadius);
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.CompareTag("Player"))
+                {
+                    Debug.Log("PlayerEnterZone");
+                    Exit();
+                    return;
+                }
+            }
+        }
+        
+        
+        //DEBUG:
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(_rb.position, _detectionRadius);
         }
     }
 }

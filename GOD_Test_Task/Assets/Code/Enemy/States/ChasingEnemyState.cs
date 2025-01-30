@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Code.Enemy.States
 {
     public class ChasingEnemyState : IEnemyState
@@ -10,22 +12,22 @@ namespace Code.Enemy.States
         
         public void Enter()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("EnterChasingState");
         }
 
         public void Updater()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void FixedUpdater()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void Exit()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("ExitChasingState");
         }
     }
 }
