@@ -474,7 +474,7 @@ MonoBehaviour:
   walkSpeed: 2.5
   rb: {fileID: 577726425}
   changeDirectionInterval: 1.5
-  detectionRadius: 10
+  detectionRadius: 5
 --- !u!61 &577726424
 BoxCollider2D:
   m_ObjectHideFlags: 0

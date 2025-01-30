@@ -33,11 +33,18 @@ public class PlayerMovement : MonoBehaviour
             _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
         
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 5);
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * _moveSpeed * Time.fixedDeltaTime); 
         
+    }
+    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 5);
     }
 }
