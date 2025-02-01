@@ -2448,6 +2448,10 @@ PrefabInstance:
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 618590693}
+    - target: {fileID: 4820574153691869374, guid: 835cf4f11f49b134bbceeebd20578dc3, type: 3}
+      propertyPath: _detectionRange
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 835cf4f11f49b134bbceeebd20578dc3, type: 3}
 --- !u!1001 &3387547288137429801
@@ -2509,6 +2513,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1230994623}
+    - target: {fileID: 3387547289325899755, guid: 4094875ec80e93f449edd37755f16b96, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3387547289325899755, guid: 4094875ec80e93f449edd37755f16b96, type: 3}
       propertyPath: attackRadius
       value: 1.25

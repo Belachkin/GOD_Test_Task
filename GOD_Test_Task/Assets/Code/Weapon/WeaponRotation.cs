@@ -11,6 +11,8 @@ public class WeaponRotation : MonoBehaviour
     [SerializeField] private Transform _leftHand;     
     [SerializeField] private Transform _rightHand;
     
+    [SerializeField] private float _detectionRange;
+    
     private Vector2 movement;
 
     public void Update()
@@ -20,15 +22,47 @@ public class WeaponRotation : MonoBehaviour
         
         if (movement != Vector2.zero)
         {
-            float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
             
-            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            _weaponRotationPoint.rotation = Quaternion.Slerp(_weaponRotationPoint.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-
-            _weaponSprite.flipY = movement.x < 0;
-            
-            SyncHandsWithWeapon();
+            if (!TryDetectionEnemy())
+            {
+                RotateWeaponTowardsMovement();
+            }
         }
+    }
+    
+    private bool TryDetectionEnemy()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _detectionRange);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                Vector2 direction = (Vector2)collider.transform.position - (Vector2)_weaponRotationPoint.position;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                
+                Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                _weaponRotationPoint.rotation = Quaternion.Slerp(_weaponRotationPoint.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+                
+                _weaponSprite.flipY = direction.x < 0;
+                
+                SyncHandsWithWeapon();
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    private void RotateWeaponTowardsMovement()
+    {
+        float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
+        
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        _weaponRotationPoint.rotation = Quaternion.Slerp(_weaponRotationPoint.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        
+        _weaponSprite.flipY = movement.x < 0;
+        
+        SyncHandsWithWeapon();
     }
     
     private void SyncHandsWithWeapon()
@@ -50,5 +84,9 @@ public class WeaponRotation : MonoBehaviour
             Gizmos.DrawLine(_leftHand.position, _weaponHolder.position);
             Gizmos.DrawLine(_rightHand.position, _weaponHolder.position);
         }
+        
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, _detectionRange);
     }
+    
 }
