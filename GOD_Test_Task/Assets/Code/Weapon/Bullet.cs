@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -15,6 +16,14 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         
         rb.velocity = Direction.normalized * _speed;
+
+        StartCoroutine(Lifetime());
+    }
+
+    private IEnumerator Lifetime()
+    {
+        yield return new WaitForSeconds(_lifeTime);
+        Destroy(gameObject);
     }
     
     
