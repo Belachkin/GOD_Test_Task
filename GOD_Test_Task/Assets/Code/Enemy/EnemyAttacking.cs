@@ -14,16 +14,16 @@ public class EnemyAttacking : MonoBehaviour
     public void AttackStart()
     {
         isAttacking = true; // Начало атаки
-        _collider.gameObject.SetActive(true);
+        /*_collider.gameObject.SetActive(true);*/
     }
 
     public void AttackEnd()
     {
         isAttacking = false; // Конец атаки
-        _collider.gameObject.SetActive(false);
+        /*_collider.gameObject.SetActive(false);*/
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (isAttacking && other.CompareTag("Player"))
         {
@@ -35,7 +35,8 @@ public class EnemyAttacking : MonoBehaviour
                 playerHealth.TakeDamage(damage);
                 
                 // После нанесения урона сразу выключаем коллайдер
-                _collider.gameObject.SetActive(false);
+                /*_collider.gameObject.SetActive(false);*/
+                isAttacking = false;
             }
         }
     }

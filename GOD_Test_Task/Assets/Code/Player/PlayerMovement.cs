@@ -20,6 +20,11 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        if (rb.IsSleeping())
+        {
+            rb.WakeUp();
+        }
+        
         movement.x = _joystick.Horizontal;
         movement.y = _joystick.Vertical;
 
