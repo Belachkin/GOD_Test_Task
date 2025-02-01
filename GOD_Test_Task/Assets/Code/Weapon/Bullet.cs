@@ -1,10 +1,11 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _lifeTime = 3f;
-    [SerializeField] private float _damage = 10f;
+    [SerializeField] private int _damage = 10;
     [SerializeField] private float _speed = 10f;
 
     public Vector2 Direction;
@@ -20,6 +21,15 @@ public class Bullet : MonoBehaviour
         StartCoroutine(Lifetime());
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            other.GetComponent<Health>().TakeDamage(_damage);
+            Destroy(gameObject);
+        }
+    }
+    
     private IEnumerator Lifetime()
     {
         yield return new WaitForSeconds(_lifeTime);
