@@ -8,7 +8,10 @@ public class EnemyStateMashine
 {
     private Dictionary<Type, IEnemyState> states = new Dictionary<Type, IEnemyState>();
     private IEnemyState currentState;
-
+    
+    //Debug
+    public IEnemyState CurrentState => currentState;
+    
     public void AddState(IEnemyState state)
     {
         states.Add(state.GetType(), state);

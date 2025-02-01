@@ -10,20 +10,23 @@ public class ChasingEnemyState : IEnemyState
     
     private bool isChasing = false;
     private Vector2 direction;
+    private Animator _animator;
     
     private EnemyStateMashine _stateMashine;
-    public ChasingEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb, float walkSpeed, float detectionRadius, float attackRadius)
+    public ChasingEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb, float walkSpeed, float detectionRadius, float attackRadius, Animator animator)
     {
         _stateMashine = stateMashine;
         _rb = rb;
         _walkSpeed = walkSpeed;
         _detectionRadius = detectionRadius;
         _attackRadius = attackRadius;
+        _animator = animator;
     }
     
     public void Enter()
     {
         Debug.Log("EnterChasingState");
+        _animator.SetBool("Attacking", false);
         isChasing = false;
     }
 

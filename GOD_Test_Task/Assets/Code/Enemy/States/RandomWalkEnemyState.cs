@@ -13,10 +13,10 @@ namespace Code.Enemy.States
         
         private EnemyStateMashine _stateMashine;
         private Vector2 travelDirection = Vector2.zero;
-        
+        private Animator _animator;
         public RandomWalkEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb, 
                                     float walkSpeed, 
-                                    float changeDirectionInterval, float detectionRadius)
+                                    float changeDirectionInterval, float detectionRadius, Animator animator)
         {
             _stateMashine = stateMashine; 
             
@@ -24,11 +24,13 @@ namespace Code.Enemy.States
             _walkSpeed = walkSpeed;
             _changeDirectionInterval = changeDirectionInterval;
             _detectionRadius = detectionRadius;
+            _animator = animator; 
         }
         
         public void Enter()
         {
             Debug.Log("Enter RndWalk");
+            _animator.SetBool("Attacking", false);
             _nextChangeTime = Time.time + _changeDirectionInterval;
             GenerateNewDirection();
         }
@@ -50,6 +52,7 @@ namespace Code.Enemy.States
             if (travelDirection != _rb.position)
             {
                 _rb.MovePosition(_rb.position + travelDirection * _walkSpeed * Time.fixedDeltaTime); 
+                
             }
         }
         

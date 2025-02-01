@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private Animator animator;
+    
     [SerializeField] private float walkSpeed = 2.5f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float changeDirectionInterval = 0.5f;
@@ -18,9 +20,9 @@ public class Enemy : MonoBehaviour
     {
         stateMashine = new EnemyStateMashine();
 
-        stateMashine.AddState(new RandomWalkEnemyState(stateMashine, rb, walkSpeed, changeDirectionInterval, detectionRadius));
-        stateMashine.AddState(new ChasingEnemyState(stateMashine, rb, walkSpeed, detectionRadius, attackRadius));
-        stateMashine.AddState(new AttackEnemyState(stateMashine, rb, attackRadius, damage, attackCooldown));
+        stateMashine.AddState(new RandomWalkEnemyState(stateMashine, rb, walkSpeed, changeDirectionInterval, detectionRadius, animator));
+        stateMashine.AddState(new ChasingEnemyState(stateMashine, rb, walkSpeed, detectionRadius, attackRadius, animator));
+        stateMashine.AddState(new AttackEnemyState(stateMashine, rb, attackRadius, damage, attackCooldown, animator));
         
         stateMashine.SetState<RandomWalkEnemyState>();
     }
@@ -34,4 +36,15 @@ public class Enemy : MonoBehaviour
     {
         stateMashine.FixedUpdate();
     }
+    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
+    }
+    
+    
 }

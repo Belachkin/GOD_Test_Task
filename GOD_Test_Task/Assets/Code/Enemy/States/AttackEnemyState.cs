@@ -11,8 +11,14 @@ namespace Code.Enemy.States
         
         private float timeSinceLastAttack = 0f;
         private Health playerHealth;
+
+
+        private Transform _attackPoint;
+        private float _attackRange;
+        private Animator _animator;
+        
         private EnemyStateMashine _stateMashine;
-        public AttackEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb , float attackRadius, int damage, float attackCooldown)
+        public AttackEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb , float attackRadius, int damage, float attackCooldown, Animator animator)
         {
             _stateMashine = stateMashine;
 
@@ -20,6 +26,7 @@ namespace Code.Enemy.States
             _attackRadius = attackRadius;
             _damage = damage;
             _attackCooldown = attackCooldown;
+            _animator = animator;
         }
         public void Enter()
         {
@@ -43,7 +50,7 @@ namespace Code.Enemy.States
                 }
             }
             
-            if (playerDetected && timeSinceLastAttack >= _attackCooldown)
+            /*if (playerDetected && timeSinceLastAttack >= _attackCooldown)
             {
                 
                 if (playerHealth != null)
@@ -52,7 +59,19 @@ namespace Code.Enemy.States
                 }
                 
                 timeSinceLastAttack = 0f; 
+            }*/
+
+            
+
+            if (playerDetected)
+            {
+                _animator.SetBool("Attacking", true);
             }
+            else
+            {
+                _animator.SetBool("Attacking", false);
+            }
+            
             
             if (!playerDetected)
             {
