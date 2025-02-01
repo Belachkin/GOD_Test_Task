@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 using Code.Enemy.States;
 
 public class ChasingEnemyState : IEnemyState

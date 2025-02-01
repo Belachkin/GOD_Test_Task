@@ -132,11 +132,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4210029}
+  - component: {fileID: 7622055486688439909}
   - component: {fileID: 3366304956213263559}
   - component: {fileID: 7622055486688439908}
   - component: {fileID: 2746466060450102639}
   - component: {fileID: 1385107855602431648}
-  - component: {fileID: 7622055486688439909}
+  - component: {fileID: 7622055486688439910}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -232,7 +233,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82206214}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 0, z: 0}
+  m_LocalPosition: {x: 0.565, y: -0.042, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3128,12 +3129,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _joystick: {fileID: 618590693}
   _moveSpeed: 5
-  _rotationSpeed: 10
-  _weaponSprite: {fileID: 0}
-  _weaponRotationPoint: {fileID: 0}
-  _weaponHolder: {fileID: 0}
-  _leftHand: {fileID: 0}
-  _rightHand: {fileID: 0}
 --- !u!61 &1825534984
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3398,12 +3393,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _joystick: {fileID: 618590693}
   _moveSpeed: 5
-  _rotationSpeed: 10
-  _weaponSprite: {fileID: 82206216}
-  _weaponRotationPoint: {fileID: 212846800}
-  _weaponHolder: {fileID: 82206215}
-  _leftHand: {fileID: 618428536}
-  _rightHand: {fileID: 1156770067}
 --- !u!50 &3366304956213263559
 Rigidbody2D:
   serializedVersion: 4
@@ -3472,3 +3461,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7622055486688439910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f78b50d6d8035f428a2fe7c642b9f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _joystick: {fileID: 618590693}
+  _rotationSpeed: 10
+  _weaponSprite: {fileID: 82206216}
+  _weaponRotationPoint: {fileID: 212846800}
+  _weaponHolder: {fileID: 82206215}
+  _leftHand: {fileID: 618428536}
+  _rightHand: {fileID: 1156770067}
