@@ -1,21 +1,45 @@
+using System;
 using System.Collections.Generic;
+using Code.Inventory;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private List<Item> DebugItems;
     [SerializeField] private FixedJoystick _joystick;
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private List<SpriteRenderer> _flipSprites;
+    [SerializeField] private InventoryUI _inventoryUI;
     
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 movement;
-    
+    private Inventory inventory;
+
+    private void Awake()
+    {
+        inventory = new Inventory();
+        
+        var newItem = new InventoryItem();
+        newItem.Item = DebugItems[0];
+        newItem.Quantity = 12;
+        inventory.AddItem(newItem);
+        
+        var newItem2 = new InventoryItem();
+        newItem2.Item = DebugItems[1];
+        newItem2.Quantity = 3;
+        inventory.AddItem(newItem2);
+        
+        _inventoryUI.SetInventory(inventory);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        
+        _inventoryUI.RefreshInventoryItems();
     }
     
     void Update()
