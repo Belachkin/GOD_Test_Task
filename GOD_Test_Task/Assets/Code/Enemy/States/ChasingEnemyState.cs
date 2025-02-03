@@ -11,9 +11,12 @@ public class ChasingEnemyState : IEnemyState
     private bool isChasing = false;
     private Vector2 direction;
     private Animator _animator;
+    private Health _health;
     
     private EnemyStateMashine _stateMashine;
-    public ChasingEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb, float walkSpeed, float detectionRadius, float attackRadius, Animator animator)
+    public ChasingEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb, 
+        float walkSpeed, float detectionRadius, 
+        float attackRadius, Animator animator, Health health)
     {
         _stateMashine = stateMashine;
         _rb = rb;
@@ -21,6 +24,7 @@ public class ChasingEnemyState : IEnemyState
         _detectionRadius = detectionRadius;
         _attackRadius = attackRadius;
         _animator = animator;
+        _health = health;
     }
     
     public void Enter()
@@ -32,6 +36,11 @@ public class ChasingEnemyState : IEnemyState
 
     public void Updater()
     {
+        
+        if (_health.Value <= 0)
+        {
+            _stateMashine.SetState<DeadEnemyState>();
+        }
         
         Collider2D[] collidersForAttack = Physics2D.OverlapCircleAll(_rb.position, _attackRadius);
         foreach (Collider2D collider in collidersForAttack)

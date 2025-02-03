@@ -4,19 +4,19 @@ namespace Code.Enemy.States
 {
     public class RandomWalkEnemyState : IEnemyState
     {
-        
         private Rigidbody2D _rb;
         private float _walkSpeed;
         private float _changeDirectionInterval;
         private float _nextChangeTime;
         private float _detectionRadius;
+        private Health _health;
         
         private EnemyStateMashine _stateMashine;
         private Vector2 travelDirection = Vector2.zero;
         private Animator _animator;
         public RandomWalkEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb, 
                                     float walkSpeed, 
-                                    float changeDirectionInterval, float detectionRadius, Animator animator)
+                                    float changeDirectionInterval, float detectionRadius, Animator animator, Health health)
         {
             _stateMashine = stateMashine; 
             
@@ -25,6 +25,7 @@ namespace Code.Enemy.States
             _changeDirectionInterval = changeDirectionInterval;
             _detectionRadius = detectionRadius;
             _animator = animator; 
+            _health = health;
         }
         
         public void Enter()
@@ -37,6 +38,11 @@ namespace Code.Enemy.States
 
         public void Updater()
         {
+            if (_health.Value <= 0)
+            {
+                _stateMashine.SetState<DeadEnemyState>();
+            }
+            
             if (Time.time >= _nextChangeTime)
             {
                 GenerateNewDirection();
@@ -64,7 +70,6 @@ namespace Code.Enemy.States
         
         private void GenerateNewDirection()
         {
-            // Генерация нового случайного направления
             float angle = Random.Range(0, 2 * Mathf.PI);
             travelDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
         }

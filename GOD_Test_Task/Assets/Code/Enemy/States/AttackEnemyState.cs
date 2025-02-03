@@ -5,28 +5,26 @@ namespace Code.Enemy.States
     public class AttackEnemyState : IEnemyState
     {
         private float _attackRadius;
-        private int _damage;
         private Rigidbody2D _rb;
-        private float _attackCooldown;
         
-        private float timeSinceLastAttack = 0f;
-        private Health playerHealth;
-
-
         private Transform _attackPoint;
         private float _attackRange;
         private Animator _animator;
+        private Health _health;
         
         private EnemyStateMashine _stateMashine;
-        public AttackEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb , float attackRadius, int damage, float attackCooldown, Animator animator)
+        public AttackEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb , 
+            float attackRadius, int damage, 
+            float attackCooldown, Animator animator, Health health)
         {
             _stateMashine = stateMashine;
 
             _rb = rb;
             _attackRadius = attackRadius;
-            _damage = damage;
-            _attackCooldown = attackCooldown;
+            /*_damage = damage;
+            _attackCooldown = attackCooldown;*/
             _animator = animator;
+            _health = health;
         }
         public void Enter()
         {
@@ -35,7 +33,12 @@ namespace Code.Enemy.States
 
         public void Updater()
         {
-            timeSinceLastAttack += Time.deltaTime;
+            if (_health.Value <= 0)
+            {
+                _stateMashine.SetState<DeadEnemyState>();
+            }
+            
+            /*timeSinceLastAttack += Time.deltaTime;*/
             
             bool playerDetected = false;
             
@@ -44,7 +47,7 @@ namespace Code.Enemy.States
             {
                 if (collider.CompareTag("Player"))
                 {
-                    playerHealth = collider.GetComponent<Health>();
+                    /*playerHealth = collider.GetComponent<Health>();*/
                     playerDetected = true;
                     break;
                 }
