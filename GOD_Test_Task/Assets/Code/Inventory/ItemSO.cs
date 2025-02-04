@@ -8,6 +8,7 @@ namespace Code.Inventory
         public int ID;
         public Sprite Icon;
         public string Name;
+        public string Description;
         public bool Stackable;
         public int StackSize;
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Code.Inventory;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,10 @@ public class InventoryManager : MonoBehaviour
     
     [SerializeField] private List<ItemSlot> itemSlots;
     
+    [SerializeField] private Image itemImage;
+    [SerializeField] private TextMeshProUGUI itemName;
+    [SerializeField] private TextMeshProUGUI itemDescription;
+    [SerializeField] private TextMeshProUGUI itemQuantity;
     private void Start()
     {
         openButton.onClick.AddListener(OpenInventory);
@@ -30,62 +35,91 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void AddItem(ItemSO item, int quantity)
-{
-    if (item == null || quantity <= 0)
     {
-        Debug.LogWarning("Предмет или количество недействительны.");
-        return;
-    }
-    
-    if (item.Stackable)
-    {
-        for (int i = 0; i < itemSlots.Count && quantity > 0; i++)
+        if (item == null || quantity <= 0)
         {
-            if (!itemSlots[i].isFull || (itemSlots[i]._ItemSO != null && itemSlots[i]._ItemSO.ID == item.ID))
+            Debug.LogWarning("Предмет или количество недействительны.");
+            return;
+        }
+        
+        if (item.Stackable)
+        {
+            for (int i = 0; i < itemSlots.Count && quantity > 0; i++)
             {
-                int remainingSpace = item.StackSize - itemSlots[i].Quantity;
-
-                if (remainingSpace > 0)
+                if (!itemSlots[i].isFull || (itemSlots[i]._ItemSO != null && itemSlots[i]._ItemSO.ID == item.ID))
                 {
-                    int amountToAdd = Mathf.Min(remainingSpace, quantity);
-                    itemSlots[i].AddItem(item, amountToAdd);
-                    quantity -= amountToAdd;
-                    
-                    if (!itemSlots[i].isFull)
+                    int remainingSpace = item.StackSize - itemSlots[i].Quantity;
+
+                    if (remainingSpace > 0)
                     {
-                        itemSlots[i].isFull = true;
+                        int amountToAdd = Mathf.Min(remainingSpace, quantity);
+                        itemSlots[i].AddItem(item, amountToAdd);
+                        quantity -= amountToAdd;
+                        
+                        if (!itemSlots[i].isFull)
+                        {
+                            itemSlots[i].isFull = true;
+                        }
                     }
+                }
+            }
+            
+            for (int i = 0; i < itemSlots.Count && quantity > 0; i++)
+            {
+                if (!itemSlots[i].isFull)
+                {
+                    int amountToAdd = Mathf.Min(item.StackSize, quantity);
+                    itemSlots[i].AddItem(item, amountToAdd);
+                    itemSlots[i].isFull = true;
+                    quantity -= amountToAdd;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < itemSlots.Count && quantity > 0; i++)
+            {
+                if (!itemSlots[i].isFull)
+                {
+                    itemSlots[i].AddItem(item, 1);
+                    itemSlots[i].isFull = true;
+                    quantity--;
                 }
             }
         }
         
-        for (int i = 0; i < itemSlots.Count && quantity > 0; i++)
+        if (quantity > 0)
         {
-            if (!itemSlots[i].isFull)
-            {
-                int amountToAdd = Mathf.Min(item.StackSize, quantity);
-                itemSlots[i].AddItem(item, amountToAdd);
-                itemSlots[i].isFull = true;
-                quantity -= amountToAdd;
-            }
+            Debug.LogError($"Не хватает слотов для добавления {quantity} предметов \"{item.Name}\".");
         }
     }
-    else
+
+    public void DeselectAll()
     {
-        for (int i = 0; i < itemSlots.Count && quantity > 0; i++)
+        for (int i = 0; i < itemSlots.Count; i++)
         {
-            if (!itemSlots[i].isFull)
-            {
-                itemSlots[i].AddItem(item, 1);
-                itemSlots[i].isFull = true;
-                quantity--;
-            }
+            itemSlots[i].Deselect();
         }
+    }
+
+    public void ViewSlot(ItemSO item, int quantity)
+    {
+        itemImage.sprite = item.Icon;
+        itemName.text = item.Name;
+        itemDescription.text = item.Description;
+        itemQuantity.text = quantity.ToString();
     }
     
-    if (quantity > 0)
+    public void ViewSlot()
     {
-        Debug.LogError($"Не хватает слотов для добавления {quantity} предметов \"{item.Name}\".");
+        itemImage.sprite = null;
+        itemName.text = "";
+        itemDescription.text = "";
+        itemQuantity.text = "";
     }
-}
+
+    public void DeleteSelectSlot()
+    {
+        
+    }
 }
