@@ -18,10 +18,13 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemDescription;
     [SerializeField] private TextMeshProUGUI itemQuantity;
+    
+    [SerializeField] private Button deleteButton;
     private void Start()
     {
         openButton.onClick.AddListener(OpenInventory);
         closeButton.onClick.AddListener(CloseInventory);
+        deleteButton.onClick.AddListener(DeleteSelectSlot);
     }
 
     private void OpenInventory()
@@ -120,6 +123,12 @@ public class InventoryManager : MonoBehaviour
 
     public void DeleteSelectSlot()
     {
-        
+        for (int i = 0; i < itemSlots.Count; i++)
+        {
+            if (itemSlots[i].isSelected)
+            {
+                itemSlots[i].Clear();
+            }
+        }
     }
 }

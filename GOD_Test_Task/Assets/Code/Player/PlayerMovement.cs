@@ -53,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
                 _flipSprites[i].flipX = false;
             }
         }
-        
     }
     
     void FixedUpdate()

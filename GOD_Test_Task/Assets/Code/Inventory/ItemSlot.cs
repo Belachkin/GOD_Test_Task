@@ -79,5 +79,16 @@ namespace Code.Inventory
             }
             
         }
+
+        public void Clear()
+        {
+            Quantity = 0;
+            _ItemSO = null;
+            _icon.sprite = null;
+            _quantityText.text = "";
+            isFull = false;
+            inventoryManager.DeselectAll();
+            itemObject.SetActive(false);
+        }
     }
 }
