@@ -1,13 +1,30 @@
+using System;
 using UnityEngine;
 
 namespace Code.Inventory
 {
-    [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
-    public class Item : ScriptableObject
+    public class Item : MonoBehaviour
     {
-        public Sprite Icon;
-        public string Name;
-        public bool Stackable;
-        public int StackSize;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        
+        public ItemSO _ItemSO;
+        public int Quantity;
+        
+        private InventoryManager inventoryManager;
+
+        private void Start()
+        {
+            inventoryManager = FindObjectOfType<InventoryManager>();
+            spriteRenderer.sprite = _ItemSO.Icon;
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                inventoryManager.AddItem(_ItemSO, Quantity);
+                Destroy(gameObject);
+            }
+        }
     }
 }
