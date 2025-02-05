@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608477948983545545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.4, y: 0.043, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -503,7 +503,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &4820574153691869372
 BoxCollider2D:
@@ -550,6 +550,7 @@ MonoBehaviour:
   - {fileID: 3107736295652200137}
   - {fileID: 3107736297474560340}
   - {fileID: 3107736296191935926}
+  _deadPopupMenu: {fileID: 0}
 --- !u!114 &4041982811414145144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,6 +584,7 @@ MonoBehaviour:
   _weaponHolder: {fileID: 3107736295934017759}
   _leftHand: {fileID: 3107736296467359392}
   _rightHand: {fileID: 3107736297006495691}
+  _detectionRange: 5
 --- !u!114 &2565254208629376777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,6 +601,7 @@ MonoBehaviour:
   _firePoint: {fileID: 3281009094422900070}
   _bulletPrefab: {fileID: 7824491087542652355, guid: 40fd39c5401cc97468c1e41732a2ff82, type: 3}
   _fire: {fileID: 1648609282588711793}
+  _ammoText: {fileID: 0}
 --- !u!1 &3107736295934017758
 GameObject:
   m_ObjectHideFlags: 0

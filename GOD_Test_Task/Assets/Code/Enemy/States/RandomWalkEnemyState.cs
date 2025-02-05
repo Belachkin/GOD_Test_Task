@@ -76,10 +76,7 @@ namespace Code.Enemy.States
                 {
                     _rb.MovePosition(_rb.position + travelDirection * _walkSpeed * Time.fixedDeltaTime);
                 }
-                else
-                {
-                    Debug.Log("FALSE");
-                }
+                
                 
             }
         }
