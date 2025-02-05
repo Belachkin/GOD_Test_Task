@@ -1,5 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Code.Enemy.States;
+using Code.Inventory;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,8 +20,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int attackCooldown = 1;
     
     [SerializeField] private Health health;
+    [SerializeField] private List<GameObject> dropItems;
     
     private EnemyStateMashine stateMashine;
+
+    
     
     private void Start()
     {
@@ -51,7 +59,13 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    
+
+    private void OnDestroy()
+    {
+        var newItem = Instantiate(dropItems[Random.Range(0, dropItems.Count)], transform.position, Quaternion.identity);
+        newItem.GetComponent<Item>().Quantity = Random.Range(1, 3);
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;

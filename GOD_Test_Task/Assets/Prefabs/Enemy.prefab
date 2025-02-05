@@ -411,7 +411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3387547288813940729}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.007999897, y: 0.122999996, z: 0.3892897}
+  m_LocalPosition: {x: 0.007999897, y: 0.123, z: 0.3892897}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -824,14 +824,15 @@ MonoBehaviour:
   animator: {fileID: 3387547289325899670}
   walkSpeed: 2.5
   rb: {fileID: 3387547289325899753}
-  changeDirectionInterval: 0.5
+  changeDirectionInterval: 3
   detectionRadius: 5
   attackRadius: 1.25
   damage: 1
   attackCooldown: 1
   health: {fileID: 3387547289325899754}
-  _minBounds: {x: -17, y: 9}
-  _maxBounds: {x: 67, y: -37}
+  dropItems:
+  - {fileID: 718713323139855927, guid: 67a83bfb51531ac4790ce11aea7b6511, type: 3}
+  - {fileID: 718713323139855927, guid: 9fe8cfe4dc318f84198793980e8b22c5, type: 3}
 --- !u!114 &3387547289325899754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,7 +1100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3387547289833869602}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.26399994, y: 0.219, z: 0.3892897}
+  m_LocalPosition: {x: 0.2639999, y: 0.219, z: 0.3892897}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
