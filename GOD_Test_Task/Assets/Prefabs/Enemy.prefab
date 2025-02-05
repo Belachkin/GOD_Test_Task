@@ -833,6 +833,8 @@ MonoBehaviour:
   dropItems:
   - {fileID: 718713323139855927, guid: 67a83bfb51531ac4790ce11aea7b6511, type: 3}
   - {fileID: 718713323139855927, guid: 9fe8cfe4dc318f84198793980e8b22c5, type: 3}
+  _minBounds: {x: -17, y: 9}
+  _maxBounds: {x: 67, y: -37}
 --- !u!114 &3387547289325899754
 MonoBehaviour:
   m_ObjectHideFlags: 0

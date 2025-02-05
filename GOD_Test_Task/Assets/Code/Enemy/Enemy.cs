@@ -22,9 +22,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Health health;
     [SerializeField] private List<GameObject> dropItems;
     
-    private EnemyStateMashine stateMashine;
-
+    [SerializeField] private Vector2 _minBounds;
+    [SerializeField] private Vector2 _maxBounds;
     
+    private EnemyStateMashine stateMashine;
     
     private void Start()
     {
@@ -32,7 +33,7 @@ public class Enemy : MonoBehaviour
 
         stateMashine.AddState(new RandomWalkEnemyState(stateMashine, rb, 
                                                         walkSpeed, changeDirectionInterval, 
-                                                        detectionRadius, animator, health));
+                                                        detectionRadius, animator, health, _minBounds, _maxBounds));
         stateMashine.AddState(new ChasingEnemyState(stateMashine, rb, 
                                                     walkSpeed, detectionRadius, 
                                                     attackRadius, animator, health));
@@ -74,5 +75,19 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
         
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+            
+        Vector3 bottomLeft = new Vector3(_minBounds.x, _minBounds.y, 0);
+        Vector3 bottomRight = new Vector3(_maxBounds.x, _minBounds.y, 0);
+        Vector3 topLeft = new Vector3(_minBounds.x, _maxBounds.y, 0);
+        Vector3 topRight = new Vector3(_maxBounds.x, _maxBounds.y, 0);
+            
+        Gizmos.DrawLine(bottomLeft, bottomRight); // Нижняя сторона
+        Gizmos.DrawLine(bottomRight, topRight);   // Правая сторона
+        Gizmos.DrawLine(topRight, topLeft);       // Верхняя сторона
+        Gizmos.DrawLine(topLeft, bottomLeft);     // Левая сторона
     }
 }

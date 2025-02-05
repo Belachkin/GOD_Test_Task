@@ -14,9 +14,13 @@ namespace Code.Enemy.States
         private EnemyStateMashine _stateMashine;
         private Vector2 travelDirection = Vector2.zero;
         private Animator _animator;
+        
+        private Vector2 _minBounds;
+        private Vector2 _maxBounds;
+        
         public RandomWalkEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb,
             float walkSpeed,
-            float changeDirectionInterval, float detectionRadius, Animator animator, Health health)
+            float changeDirectionInterval, float detectionRadius, Animator animator, Health health, Vector2 minBounds, Vector2 maxBounds)
         {
             _stateMashine = stateMashine;
 
@@ -26,6 +30,9 @@ namespace Code.Enemy.States
             _detectionRadius = detectionRadius;
             _animator = animator;
             _health = health;
+            
+            _minBounds = minBounds; 
+            _maxBounds = maxBounds; 
         }
 
         public void Enter()
@@ -57,9 +64,22 @@ namespace Code.Enemy.States
             {
                 int tempDirection = travelDirection.x < 0 ? -1 : 1;
                 
-                _animator.SetFloat("Direction", tempDirection);
+                Vector2 nextPosition = _rb.position + travelDirection * _walkSpeed * Time.fixedDeltaTime;
                 
-                _rb.MovePosition(_rb.position + travelDirection * _walkSpeed * Time.fixedDeltaTime);
+                
+                _animator.SetFloat("Direction", tempDirection);
+
+                if (nextPosition.x > _minBounds.x && 
+                    nextPosition.x < _maxBounds.x && 
+                    nextPosition.y < _minBounds.y && 
+                    nextPosition.y > _maxBounds.y)
+                {
+                    _rb.MovePosition(_rb.position + travelDirection * _walkSpeed * Time.fixedDeltaTime);
+                }
+                else
+                {
+                    Debug.Log("FALSE");
+                }
                 
             }
         }
@@ -72,8 +92,7 @@ namespace Code.Enemy.States
 
         private void GenerateNewDirection()
         {
-            float angle = Random.Range(0, 2 * Mathf.PI);
-            travelDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+            travelDirection = new Vector2(Random.Range(-2, 2), Random.Range(-2, 2)).normalized;
         }
         private void TryDetectionPlayer()
         {
@@ -87,14 +106,6 @@ namespace Code.Enemy.States
                     return;
                 }
             }
-        }
-
-
-//DEBUG:
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(_rb.position, _detectionRadius);
         }
     }
 }
