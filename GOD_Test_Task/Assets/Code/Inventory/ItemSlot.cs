@@ -43,7 +43,16 @@ namespace Code.Inventory
             if (_ItemSO != null)
             {
                 _icon.sprite = _ItemSO.Icon;
-                _quantityText.text = Quantity.ToString();
+                
+                if (Quantity == 1)
+                {
+                    _quantityText.text = "";
+                }
+                else
+                {
+                    _quantityText.text = Quantity.ToString();
+                }
+                
                 isFull = true;
                 itemObject.SetActive(true);
             }

@@ -80,6 +80,10 @@ public class ChasingEnemyState : IEnemyState
         if (isChasing)
         {
             _rb.MovePosition(_rb.position + direction * _walkSpeed * Time.fixedDeltaTime);
+            
+            int tempDirection = direction.x < 0 ? -1 : 1;
+            
+            _animator.SetFloat("Direction", tempDirection);
         }
     }
 

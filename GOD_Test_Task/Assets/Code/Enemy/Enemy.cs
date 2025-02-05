@@ -47,6 +47,11 @@ public class Enemy : MonoBehaviour
         stateMashine.FixedUpdate();
     }
     
+    public void Dead()
+    {
+        Destroy(gameObject);
+    }
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
@@ -54,10 +59,6 @@ public class Enemy : MonoBehaviour
         
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
-    }
-
-    public void Dead()
-    {
-        Destroy(gameObject);
+        
     }
 }

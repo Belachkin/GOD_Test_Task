@@ -11,7 +11,8 @@ namespace Code.Enemy.States
         private float _attackRange;
         private Animator _animator;
         private Health _health;
-        
+
+        private Transform playerTransform;
         private EnemyStateMashine _stateMashine;
         public AttackEnemyState(EnemyStateMashine stateMashine, Rigidbody2D rb , 
             float attackRadius, int damage, 
@@ -48,6 +49,7 @@ namespace Code.Enemy.States
                 if (collider.CompareTag("Player"))
                 {
                     /*playerHealth = collider.GetComponent<Health>();*/
+                    playerTransform = collider.transform;
                     playerDetected = true;
                     break;
                 }
@@ -68,6 +70,13 @@ namespace Code.Enemy.States
 
             if (playerDetected)
             {
+                /*float deltaX = playerTransform.position.x - _rb.position.x;
+                
+                int direction = deltaX < 0 ? -1 : 1; 
+                
+                Debug.Log($"{deltaX} {direction}");
+                
+                _animator.SetFloat("Direction", direction);*/
                 _animator.SetBool("Attacking", true);
             }
             else

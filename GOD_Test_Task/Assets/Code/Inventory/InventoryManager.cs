@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Code.Inventory;
 using TMPro;
 using UnityEngine;
@@ -110,7 +111,16 @@ public class InventoryManager : MonoBehaviour
         itemImage.sprite = item.Icon;
         itemName.text = item.Name;
         itemDescription.text = item.Description;
-        itemQuantity.text = quantity.ToString();
+
+        if (quantity == 1)
+        {
+            itemQuantity.text = "";
+        }
+        else
+        {
+            itemQuantity.text = quantity.ToString();
+        }
+        
     }
     
     public void ViewSlot()
@@ -130,5 +140,15 @@ public class InventoryManager : MonoBehaviour
                 itemSlots[i].Clear();
             }
         }
+    }
+
+    public List<ItemSlot> GetItemSlots(int id)
+    {
+        return itemSlots.FindAll(x => x._ItemSO.ID == id).ToList();
+    }
+    
+    public List<ItemSlot> GetItemSlots()
+    {
+        return itemSlots;
     }
 }

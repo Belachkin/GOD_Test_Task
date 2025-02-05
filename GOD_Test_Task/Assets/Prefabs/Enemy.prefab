@@ -821,14 +821,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fce5096a90acb34a8c31b6258299088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 3387547289325899670}
   walkSpeed: 2.5
   rb: {fileID: 3387547289325899753}
   changeDirectionInterval: 0.5
   detectionRadius: 5
-  attackRadius: 2
+  attackRadius: 1.25
   damage: 1
   attackCooldown: 1
+  health: {fileID: 3387547289325899754}
+  _minBounds: {x: -17, y: 9}
+  _maxBounds: {x: 67, y: -37}
 --- !u!114 &3387547289325899754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,15 +1146,15 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3387547289843512699}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06, y: -0.20091271}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.2
+  m_Radius: 1.33
 --- !u!1 &3387547289932758637
 GameObject:
   m_ObjectHideFlags: 0
