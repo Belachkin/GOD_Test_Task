@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!156049354 &10490605
 Grid:
   m_ObjectHideFlags: 0
@@ -4096,6 +4096,54 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5458219880819917917, guid: ac6576a4f2c04184f95afe226831352d, type: 3}
   m_PrefabInstance: {fileID: 1297460914}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1454821552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1454821553}
+  - component: {fileID: 1454821554}
+  m_Layer: 0
+  m_Name: EnemyRandomSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1454821553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454821552}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1454821554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454821552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3d83e9336c4fc2b456b38cedf4e8e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _count: 3
+  _maxBounds: {x: -17, y: 9}
+  _minBounds: {x: 67, y: -37}
+  _enemyPrefab: {fileID: 3387547289325899668, guid: 4094875ec80e93f449edd37755f16b96, type: 3}
 --- !u!114 &1482374674 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7484477256293788789, guid: ac6576a4f2c04184f95afe226831352d, type: 3}
@@ -47694,7 +47742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3387547289325899668, guid: 4094875ec80e93f449edd37755f16b96, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3387547289325899671, guid: 4094875ec80e93f449edd37755f16b96, type: 3}
       propertyPath: m_RootOrder
