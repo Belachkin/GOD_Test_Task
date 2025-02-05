@@ -13,11 +13,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 movement;
-    
+    private Health health;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
+        
     }
     
     void Update()
@@ -52,6 +54,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 _flipSprites[i].flipX = false;
             }
+        }
+
+        if (health.Value <= 0)
+        {
+            animator.SetTrigger("Dead");
         }
     }
     

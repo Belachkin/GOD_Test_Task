@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Code;
 using Code.Inventory;
 using TMPro;
 using UnityEngine;
@@ -21,8 +22,12 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemQuantity;
     
     [SerializeField] private Button deleteButton;
+    
+    private Popup popup;
     private void Start()
     {
+        popup = transform.GetComponent<Popup>();
+        
         openButton.onClick.AddListener(OpenInventory);
         closeButton.onClick.AddListener(CloseInventory);
         deleteButton.onClick.AddListener(DeleteSelectSlot);
@@ -31,11 +36,13 @@ public class InventoryManager : MonoBehaviour
     private void OpenInventory()
     {
         inventory.SetActive(true);
+        popup.Show();
     }
 
     private void CloseInventory()
     {
         inventory.SetActive(false);
+        popup.Hide();
     }
 
     public void AddItem(ItemSO item, int quantity)
