@@ -5259,7 +5259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -187.83}
+  m_AnchoredPosition: {x: 0, y: -187.83002}
   m_SizeDelta: {x: -1644.4502, y: -1015.66003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1767064822
@@ -47420,6 +47420,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 954074718050280375, guid: 835cf4f11f49b134bbceeebd20578dc3, type: 3}
+      propertyPath: _deadPopupMenu
+      value: 
+      objectReference: {fileID: 815135927}
+    - target: {fileID: 954074718050280375, guid: 835cf4f11f49b134bbceeebd20578dc3, type: 3}
       propertyPath: DebugItems.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -47469,7 +47473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3107736295856284596, guid: 835cf4f11f49b134bbceeebd20578dc3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3107736295856284597, guid: 835cf4f11f49b134bbceeebd20578dc3, type: 3}
       propertyPath: m_RootOrder
@@ -47690,7 +47694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3387547289325899668, guid: 4094875ec80e93f449edd37755f16b96, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3387547289325899671, guid: 4094875ec80e93f449edd37755f16b96, type: 3}
       propertyPath: m_RootOrder
