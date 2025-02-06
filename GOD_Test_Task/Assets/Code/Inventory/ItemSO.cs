@@ -6,7 +6,6 @@ namespace Code.Inventory
     public class ItemSO : ScriptableObject
     {
         public int ID;
-        public Sprite Icon;
         public string Name;
         public string Description;
         public bool Stackable;

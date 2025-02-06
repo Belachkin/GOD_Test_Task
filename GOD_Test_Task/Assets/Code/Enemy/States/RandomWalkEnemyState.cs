@@ -37,7 +37,6 @@ namespace Code.Enemy.States
 
         public void Enter()
         {
-            Debug.Log("Enter RndWalk");
             _animator.SetBool("Attacking", false);
             _nextChangeTime = Time.time + _changeDirectionInterval;
             GenerateNewDirection();
@@ -83,8 +82,7 @@ namespace Code.Enemy.States
 
         public void Exit()
         {
-            Debug.Log("Exit RndWalk");
-
+            
         }
 
         private void GenerateNewDirection()
@@ -98,7 +96,7 @@ namespace Code.Enemy.States
             {
                 if (collider.CompareTag("Player"))
                 {
-                    Debug.Log("PlayerEnterZone");
+                    
                     _stateMashine.SetState<ChasingEnemyState>();
                     return;
                 }

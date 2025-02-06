@@ -42,7 +42,7 @@ namespace Code.Inventory
             
             if (_ItemSO != null)
             {
-                _icon.sprite = _ItemSO.Icon;
+                _icon.sprite = ItemIcons.instance.icons[_ItemSO.ID];
                 
                 if (Quantity == 1)
                 {

@@ -58,14 +58,13 @@ public class Enemy : MonoBehaviour
     
     public void Dead()
     {
+        var newItem = Instantiate(dropItems[Random.Range(0, dropItems.Count)], transform.position, Quaternion.identity);
+        newItem.GetComponent<Item>().itemData.Item = ItemIcons.instance.itemOjects[Random.Range(0, ItemIcons.instance.itemOjects.Count)];
+        newItem.GetComponent<Item>().itemData.Quantity = Random.Range(1, 3);
         Destroy(gameObject);
     }
 
-    private void OnDestroy()
-    {
-        var newItem = Instantiate(dropItems[Random.Range(0, dropItems.Count)], transform.position, Quaternion.identity);
-        newItem.GetComponent<Item>().Quantity = Random.Range(1, 3);
-    }
+    
 
     private void OnDrawGizmosSelected()
     {

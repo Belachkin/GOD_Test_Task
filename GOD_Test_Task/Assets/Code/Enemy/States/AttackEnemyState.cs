@@ -29,7 +29,7 @@ namespace Code.Enemy.States
         }
         public void Enter()
         {
-            Debug.Log("AttackState Enter");
+            
         }
 
         public void Updater()
@@ -98,7 +98,7 @@ namespace Code.Enemy.States
 
         public void Exit()
         {
-            Debug.Log("AttackState Exit");
+           
         }
     }
 }

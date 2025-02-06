@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Code.Enemy;
+using Random = UnityEngine.Random;
 
 namespace Code
 {
@@ -9,8 +13,13 @@ namespace Code
         [SerializeField] private Vector2 _minBounds;
         
         [SerializeField] private GameObject _enemyPrefab;
+        [SerializeField] private Popup _endRoundPopup;
+        
+        private List<global::Enemy> enemies = new List<global::Enemy>();
+        private bool isWin = false;
         private void Start()
         {
+            enemies.Clear();
             for (int i = 0; i < _count; i++)
             {
                 Vector3 spawnPosition = new Vector3(
@@ -19,10 +28,32 @@ namespace Code
                     0f
                 );
                 
-                Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
+                var newEnemy = Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
+                
+                enemies.Add(newEnemy.GetComponent<global::Enemy>());
             }
         }
-        
+
+        private void Update()
+        {
+            if(enemies.Count <= 0) return;
+
+            int deadIndex = 0;
+            foreach (var enemy in enemies)
+            {
+                if (enemy == null)
+                {
+                    deadIndex++;
+                }
+            }
+
+            if (deadIndex >= _count && isWin == false)
+            {
+                isWin = true;
+                _endRoundPopup.Show();
+            }
+        }
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;

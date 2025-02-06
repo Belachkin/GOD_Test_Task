@@ -21,7 +21,6 @@ public class Health : MonoBehaviour
 
     public void HealthViewUpdate()
     {
-        Debug.Log($"{value}/{maxValue} = {value/maxValue}");
         healthView?.UpdateView();
     }
     

@@ -6,23 +6,23 @@ namespace Code.Inventory
     public class Item : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer spriteRenderer;
-        
-        public ItemSO _ItemSO;
-        public int Quantity;
+
+        public ItemData itemData;
         
         private InventoryManager inventoryManager;
 
         private void Start()
         {
             inventoryManager = FindObjectOfType<InventoryManager>();
-            spriteRenderer.sprite = _ItemSO.Icon;
+            
+            spriteRenderer.sprite = ItemIcons.instance.icons[itemData.Item.ID];
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
-                inventoryManager.AddItem(_ItemSO, Quantity);
+                inventoryManager.AddItem(itemData.Item, itemData.Quantity);
                 Destroy(gameObject);
             }
         }

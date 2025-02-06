@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Code;
 using Code.Inventory;
+using Code.Saves;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,15 +24,50 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemQuantity;
     
     [SerializeField] private Button deleteButton;
+    [SerializeField] private InventoryStorageService inventoryStorageService;
     
     private Popup popup;
+    private List<ItemData> itemDatas = new List<ItemData>();
+    
+    public static Action<List<ItemData>> OnInventoryLoaded;
+
+    private void OnEnable()
+    {
+        OnInventoryLoaded += InitInventory;
+    }
+
+    private void OnDisable()
+    {
+        OnInventoryLoaded -= InitInventory;
+    }
+
     private void Start()
     {
+        inventoryStorageService.LoadInventory();
+        
         popup = transform.GetComponent<Popup>();
         
         openButton.onClick.AddListener(OpenInventory);
         closeButton.onClick.AddListener(CloseInventory);
         deleteButton.onClick.AddListener(DeleteSelectSlot);
+    }
+
+    private void InitInventory(List<ItemData> Items)
+    {
+        Debug.Log("InitInventory");
+
+        if (Items == null)
+        {
+            Items = new List<ItemData>();
+            return;
+        }
+        
+        itemDatas = Items;
+        for (int i = 0; i < Items.Count; i++)
+        {
+            itemSlots[i].AddItem(itemDatas[i].Item, itemDatas[i].Quantity);
+            
+        }
     }
 
     private void OpenInventory()
@@ -103,6 +140,8 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.LogError($"Не хватает слотов для добавления {quantity} предметов \"{item.Name}\".");
         }
+
+        Save();
     }
 
     public void DeselectAll()
@@ -115,7 +154,7 @@ public class InventoryManager : MonoBehaviour
 
     public void ViewSlot(ItemSO item, int quantity)
     {
-        itemImage.sprite = item.Icon;
+        itemImage.sprite = ItemIcons.instance.icons[item.ID];
         itemName.text = item.Name;
         itemDescription.text = item.Description;
 
@@ -147,6 +186,8 @@ public class InventoryManager : MonoBehaviour
                 itemSlots[i].Clear();
             }
         }
+        
+        Save();
     }
 
     public List<ItemSlot> GetItemSlots(int id)
@@ -157,5 +198,21 @@ public class InventoryManager : MonoBehaviour
     public List<ItemSlot> GetItemSlots()
     {
         return itemSlots;
+    }
+
+    public void Save()
+    {
+        itemDatas.Clear();
+        for (int i = 0; i < itemSlots.Count; i++)
+        {
+            var newData = new ItemData();
+            newData.Item = itemSlots[i]._ItemSO;
+            newData.Quantity = itemSlots[i].Quantity;
+            itemDatas.Add(newData);
+        }
+        
+        
+        
+        inventoryStorageService.SaveInventory(itemDatas);
     }
 }

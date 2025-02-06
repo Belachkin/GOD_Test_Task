@@ -29,7 +29,6 @@ public class ChasingEnemyState : IEnemyState
     
     public void Enter()
     {
-        Debug.Log("EnterChasingState");
         _animator.SetBool("Attacking", false);
         isChasing = false;
     }
@@ -89,6 +88,5 @@ public class ChasingEnemyState : IEnemyState
 
     public void Exit()
     {
-        Debug.Log("ExitChasingState");
     }
 }

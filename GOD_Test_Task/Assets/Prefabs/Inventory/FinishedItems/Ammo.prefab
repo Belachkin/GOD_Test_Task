@@ -99,8 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 718713323139855926}
-  _ItemSO: {fileID: 11400000, guid: efced8c4e31151a459683c38bc19cb87, type: 2}
-  Quantity: 1
+  itemData:
+    Item: {fileID: 11400000, guid: efced8c4e31151a459683c38bc19cb87, type: 2}
+    Quantity: 3
 --- !u!61 &718713323139855923
 BoxCollider2D:
   m_ObjectHideFlags: 0
