@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Code.Inventory;
 using UnityEngine;
@@ -22,15 +23,20 @@ namespace Code.Saves
         {
             Debug.Log("Restarting game");
 
-            var list = new List<ItemData>();
-            list.Clear();
-            inventoryStorageService.SaveInventory(list);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+            StartCoroutine(ClearInventoryDelay());
         }
 
         private void NextLevel()
         {
             Debug.Log("next level");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        private IEnumerator ClearInventoryDelay()
+        {
+            inventoryStorageService.SaveInventory(new List<ItemData>());
+            yield return new WaitForSeconds(0.5f);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }

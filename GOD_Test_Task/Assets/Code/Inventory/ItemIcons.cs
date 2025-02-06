@@ -8,7 +8,7 @@ namespace Code.Inventory
     {
         public static ItemIcons instance;
 
-        void Start()
+        void Awake()
         {
             if (instance == null)
             {

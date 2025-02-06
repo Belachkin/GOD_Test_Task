@@ -17,7 +17,8 @@ namespace Code
         
         private List<global::Enemy> enemies = new List<global::Enemy>();
         private bool isWin = false;
-        private void Start()
+
+        private void Awake()
         {
             enemies.Clear();
             for (int i = 0; i < _count; i++)
@@ -32,6 +33,11 @@ namespace Code
                 
                 enemies.Add(newEnemy.GetComponent<global::Enemy>());
             }
+        }
+
+        private void Start()
+        {
+            
         }
 
         private void Update()

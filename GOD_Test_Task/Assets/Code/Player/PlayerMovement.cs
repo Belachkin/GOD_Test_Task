@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code;
 using Code.Inventory;
+using Code.Saves;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
@@ -74,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dead()
     {
+        FindObjectOfType<InventoryStorageService>().SaveInventory(new List<ItemData>());
+        
         _deadPopupMenu.transform.GetChild(0).gameObject.SetActive(true);
         _deadPopupMenu.Show();
     }

@@ -1503,7 +1503,7 @@ GameObject:
   - component: {fileID: 408133166}
   - component: {fileID: 408133168}
   m_Layer: 5
-  m_Name: Image
+  m_Name: DeadMenuBBTN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1760,7 +1760,7 @@ GameObject:
   - component: {fileID: 454500171}
   - component: {fileID: 454500173}
   m_Layer: 5
-  m_Name: Image
+  m_Name: WinMenuBTN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3413,7 +3413,7 @@ GameObject:
   - component: {fileID: 999744403}
   - component: {fileID: 999744402}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: WinMenuBTN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3676,7 +3676,7 @@ RectTransform:
   m_GameObject: {fileID: 1061171442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1139544914}
